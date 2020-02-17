@@ -10,7 +10,7 @@
 %lex
 %%
 \s+                   /* no return statement, so skip whitespace */
-"0"		      return "ZERO"
+[0]		      return "ZERO"
 [1-9]		      return "POSITIVE_DIGIT"
 "*"                   return "ASTERISK"
 "$"                   return "DOLLAR"
