@@ -1,4 +1,5 @@
 /*
+    Authors: Jacob Hein, Dan Kuphal
     Description: Parses check amounts in the North-American notation
 */
 

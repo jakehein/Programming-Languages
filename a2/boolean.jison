@@ -1,4 +1,5 @@
 /*
+    Authors: Jacob Hein, Dan Kuphal
     Description: Parses Boolean expressions
 */
 
