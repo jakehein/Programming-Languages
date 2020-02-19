@@ -36,57 +36,50 @@ program
     ;
 
 // ********* this is where you must write your grammar ****************
-
-/* e1
+e1
     : e2
       { $$ = $1; }
     | e1 "XOR" e2
-      { ; }
+      { $$ = $1 + $3; }
     ;
-
-    e2
+e2
     : e3
       { $$ = $1; }
     | e2 "OR" e3
       { $$ = $1 || $3; }
     | e2 "NOR" e3
-      { ; }
+      { $$ = $1 + $3; }
     ;
-
-    e3
+e3
     : e4
       { $$ = $1; }
     | e3 "AND" e4
       { $$ = $1 && $3; }
     | e3 "NAND" e4
-      { ; }
+      { $$ = $1 + $3; }
     ;
-
-    e4
+e4
     : e5
       { $$ = $1; }
     | "NOT" e5
       { $$ = ! $2; }
     ;
-
-    e5
+e5
     : "TRUE"
-      { $$ = $1; }
+      { $$ = true; }
     | "FALSE"
-      { $$ = $1; }
+      { $$ = false; }
     | "LPAREN" e1 "RPAREN"
       { $$ = $2; }
     ;
-*/
-
-
 //****************** do NOT modify the code below ********************
 
 %%
 
 // since JavaScript does not have built-in operators for NAND, NOR or XOR,
 // you must call these helper functions in your interpreter's code
-
+/*
 function NAND(a,b) { return  !(a && b); }
 function NOR(a,b)  { return  !(a || b); }
 function XOR(a,b)  { return  a && !b || !a && b; }
+*/
