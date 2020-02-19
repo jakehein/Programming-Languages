@@ -40,7 +40,7 @@ e1
     : e2
       { $$ = $1; }
     | e1 "XOR" e2
-      { $$ = XOR($1, $3); } // fix
+      { $$ = XOR ( $1, $3 ); } // fix
     ;
 e2
     : e3
@@ -48,7 +48,7 @@ e2
     | e2 "OR" e3
       { $$ = $1 || $3; }
     | e2 "NOR" e3
-      { $$ = NOR($1, $3); } // fix
+      { $$ = NOR ( $1, $3 ); } // fix
     ;
 e3
     : e4
@@ -56,12 +56,12 @@ e3
     | e3 "AND" e4
       { $$ = $1 && $3; }
     | e3 "NAND" e4
-      { $$ = NAND($1, $3); } // fix
+      { $$ = NAND ( $1, $3 ); } // fix
     ;
 e4
     : e5
       { $$ = $1; }
-    | "NOT" e5
+    | "NOT" e4
       { $$ = ! $2; }
     ;
 e5
@@ -78,8 +78,7 @@ e5
 
 // since JavaScript does not have built-in operators for NAND, NOR or XOR,
 // you must call these helper functions in your interpreter's code
-/*
+
 function NAND(a,b) { return  !(a && b); }
 function NOR(a,b)  { return  !(a || b); }
 function XOR(a,b)  { return  a && !b || !a && b; }
-*/
