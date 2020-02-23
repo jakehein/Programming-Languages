@@ -14,7 +14,11 @@ if ( ! exports ) {
 
 var removeLast = function (ns) {
 
-    /* to be completed */
+    if (fp.isNull(fp.tl(ns)))
+        return [];
+    else {
+        return fp.cons(fp.hd(ns), removeLast(fp.tl(ns)));
+    }
 
 };
 
