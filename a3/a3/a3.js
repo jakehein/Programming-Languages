@@ -44,8 +44,8 @@ var closest = function (ns, n) {
     }
     else {
         if (fp.isLT(fp.hd(ns), n)) { // is first element < n
-            if (fp.isLT(fp.hd(fp.tl(ns), n))) { // both < n
-                if (fp.isLT(fp.sub(n, fp.hd(ns)), fp.sub(n, fp.hd(fp.tl(ns)))) { // first element is closer to n
+            if (fp.isLT(fp.hd(fp.tl(ns)), n)) { // both < n
+                if (fp.isLT(fp.sub(n, fp.hd(ns)), fp.sub(n, fp.hd(fp.tl(ns))))) { // first element is closer to n
                     return closest(fp.cons(fp.hd(ns), fp.tl(fp.tl(ns))), n); // makes list with head - 2nd element + rest.
                 } else { // second element is closer to n
                     return closest(fp.tl(ns), n));
@@ -58,14 +58,14 @@ var closest = function (ns, n) {
                 }
             }
         } else { // is first element > n
-            if (fp.isLT(fp.hd(fp.tl(ns), n))){ // hd > n , hd.tl < n
-                if (fp.isLT(fp.sub(fp.hd(ns), n), fp.sub(n, fp.hd(fp.tl(ns)))) { // first element is closer to n
+            if (fp.isLT(fp.hd(fp.tl(ns)), n)) { // hd > n , hd.tl < n
+                if (fp.isLT(fp.sub(fp.hd(ns), n), fp.sub(n, fp.hd(fp.tl(ns))))) { // first element is closer to n
                     return closest(fp.cons(fp.hd(ns), fp.tl(fp.tl(ns))), n); // makes list with head - 2nd element + rest.
                 } else { // second element is close to n
                     return closest(fp.tl(ns), n)); // makes list with head - 2nd element + rest.
                 }
             } else { //fp.isGT(fp.hd(fp.tl(ns), n)) // both > n
-                if (fp.isLT(fp.sub(fp.hd(ns), n), fp.sub(fp.hd(fp.tl(ns)), n)) { // first element is closer to n
+                if (fp.isLT(fp.sub(fp.hd(ns), n), fp.sub(fp.hd(fp.tl(ns)), n))) { // first element is closer to n
                     return closest(fp.cons(fp.hd(ns), fp.tl(fp.tl(ns))), n); // makes list with head - 2nd element + rest.
                 } else { // second element is close to n
                     return closest(fp.tl(ns), n)); // makes list with head - 2nd element + rest.
@@ -77,7 +77,18 @@ var closest = function (ns, n) {
 
 var splitList = function (ns) {
 
-    /* to be completed */
+    if (fp.isNull(ns)) { // nothing in list
+        return fp.cons(ns, []);
+    }
+    else if (fp.isNull(fp.tl(ns))) { // one element in list
+        return fp.cons(fp.cons(ns, []), []);
+    }
+    else if (fp.isLT(fp.hd(ns), fp.hd(fp.tl(ns)))) { // make new list  [1,2,4,3,....] ===> [[1,2,4],[3,.....]]
+        return fp.cons(fp.cons(fp.hd(ns), [])), fp.cons(splitList(fp.tl(ns)), []);
+    }
+    else { // add to current list
+        return fp.cons(fp.hd(ns), splitList(fp.tl(ns)));
+    }
 
 };
 
