@@ -37,8 +37,42 @@ var middle = function (ns) {
 
 var closest = function (ns, n) {
 
-    /* to be completed */
-
+    if (fp.isNull(fp.tl(ns)))
+        return fp.hd(ns);
+    else if (fp.isEq(fp.hd(ns), n)) { // head isEQ n
+        return fp.hd(ns);
+    }
+    else {
+        if (fp.isLT(fp.hd(ns), n)) { // is first element < n
+            if (fp.isLT(fp.hd(fp.tl(ns), n))) { // both < n
+                if (fp.isLT(fp.sub(n, fp.hd(ns)), fp.sub(n, fp.hd(fp.tl(ns)))) { // first element is closer to n
+                    return closest(fp.cons(fp.hd(ns), fp.tl(fp.tl(ns))), n); // makes list with head - 2nd element + rest.
+                } else { // second element is closer to n
+                    return closest(fp.tl(ns), n));
+                }
+            } else { //fp.isGT(fp.hd(fp.tl(ns), n))  // hd < n , hd.tl > n
+                if (fp.isLT(fp.sub(n, fp.hd(ns)), fp.sub(fp.hd(fp.tl(ns)), n))) { // first element is closer to n
+                    return closest(fp.cons(fp.hd(ns), fp.tl(fp.tl(ns))), n); // makes list with head - 2nd element + rest.
+                } else { // second element is closer to n
+                    return closest(fp.tl(ns), n)); // makes list with head - 2nd element + rest.
+                }
+            }
+        } else { // is first element > n
+            if (fp.isLT(fp.hd(fp.tl(ns), n))){ // hd > n , hd.tl < n
+                if (fp.isLT(fp.sub(fp.hd(ns), n), fp.sub(n, fp.hd(fp.tl(ns)))) { // first element is closer to n
+                    return closest(fp.cons(fp.hd(ns), fp.tl(fp.tl(ns))), n); // makes list with head - 2nd element + rest.
+                } else { // second element is close to n
+                    return closest(fp.tl(ns), n)); // makes list with head - 2nd element + rest.
+                }
+            } else { //fp.isGT(fp.hd(fp.tl(ns), n)) // both > n
+                if (fp.isLT(fp.sub(fp.hd(ns), n), fp.sub(fp.hd(fp.tl(ns)), n)) { // first element is closer to n
+                    return closest(fp.cons(fp.hd(ns), fp.tl(fp.tl(ns))), n); // makes list with head - 2nd element + rest.
+                } else { // second element is close to n
+                    return closest(fp.tl(ns), n)); // makes list with head - 2nd element + rest.
+                }
+            }
+        }
+    }
 };
 
 var splitList = function (ns) {
