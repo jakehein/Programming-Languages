@@ -24,7 +24,14 @@ var removeLast = function (ns) {
 
 var middle = function (ns) {
 
-    /* to be completed */
+    if (fp.isNull(fp.tl(ns)))
+        return fp.hd(ns);
+    else if (fp.isNull(removeLast(fp.tl(ns)))) {
+        return fp.hd(ns);
+    }
+    else {
+        return middle(removeLast(fp.tl(ns)));
+    }
 
 };
 
