@@ -78,16 +78,27 @@ var closest = function (ns, n) {
 var splitList = function (ns) {
 
     if (fp.isNull(ns)) { // nothing in list
-        return fp.cons(ns, []);
+        return fp.makeList(ns);
+        //return fp.cons(ns, []);
     }
     else if (fp.isNull(fp.tl(ns))) { // one element in list
-        return fp.cons(fp.cons(ns, []), []);
+        console.log(1);
+        return fp.makeList(ns);
+        //return fp.cons(ns, []);
     }
-    else if (fp.isLT(fp.hd(ns), fp.hd(fp.tl(ns)))) { // make new list  [1,2,4,3,....] ===> [[1,2,4],[3,.....]]
-        return fp.cons(fp.cons(fp.hd(ns), [])), fp.cons(splitList(fp.tl(ns)), []);
+    else if (fp.isGT(fp.hd(ns), fp.hd(fp.tl(ns)))) { // make new list  [1,2,4,3,....] ===> [[1,2,4],[3,.....]]
+        console.log(2);
+        return fp.cons(fp.cons(fp.hd(ns), []), splitList(fp.tl(ns)));
     }
     else { // add to current list
-        return fp.cons(fp.hd(ns), splitList(fp.tl(ns)));
+        if (fp.isList(fp.hd(ns))) {
+            console.log(3);
+            return fp.cons(fp.hd(ns), splitList(fp.tl(ns)));
+        }
+        else {
+            console.log(4);
+            return fp.makeList(splitList(ns));
+        }
     }
 
 };
