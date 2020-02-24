@@ -77,23 +77,19 @@ var closest = function (ns, n) {
 
 var splitList = function (ns) {
 
-    if (fp.isNull(ns)) { // nothing in list
+    if (fp.isNull(ns)) {
         console.log("list is null");
         return fp.makeList(ns);
-        //return fp.cons(ns, []);
     }
-    else if (fp.isNull(fp.tl(ns))) { // one element in list
+    else if (fp.isNull(fp.tl(ns))) {
         console.log(1);
         return fp.cons(ns, []);
-        //return fp.cons(ns, []);
     }
     else if (fp.isGT(fp.hd(ns), fp.hd(fp.tl(ns)))) {
         console.log("in GT check");
         return fp.cons(fp.cons(fp.hd(ns), []), splitList(fp.tl(ns)));
-        // if GT then return []
-        // else return hd(splitList(tl(ns)))
     }
-    else { // this is the case when head isn't a list
+    else {
         console.log(2);
          return fp.cons(fp.cons(fp.hd(ns), fp.hd(splitList(fp.tl(ns)))), fp.tl(splitList(fp.tl(ns))));
     }
