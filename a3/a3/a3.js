@@ -86,6 +86,23 @@ var splitList = function (ns) {
         return fp.makeList(ns);
         //return fp.cons(ns, []);
     }
+    else if (fp.isGT(fp.hd(ns), fp.hd(fp.tl(ns)))) { //FIX ME!!!
+        return fp.tl(splitList(fp.tl(ns)));
+        // if GT then return []
+        // else return hd(splitList(tl(ns)))
+    }
+    else { // this is the case when head isn't a list
+        console.log(2);
+         return fp.cons(fp.cons(fp.hd(ns), fp.hd(splitList(fp.tl(ns)))), fp.tl(splitList(fp.tl(ns))));
+    }
+
+    //else if (fp.isList(fp.hd(ns))) {
+    //    if (fp.isGT) {
+
+    //    }
+        //go into head of list and append hd.tl(ns) to end of hd(ns)
+    //}
+    /*
     else if (fp.isGT(fp.hd(ns), fp.hd(fp.tl(ns)))) { // make new list  [1,2,4,3,....] ===> [[1,2,4],[3,.....]]
         console.log(2);
         return fp.cons(fp.cons(fp.hd(ns), []), splitList(fp.tl(ns)));
@@ -100,7 +117,7 @@ var splitList = function (ns) {
             return fp.makeList(splitList(ns));
         }
     }
-
+    */
 };
 
 var addDigits = function (n) {
