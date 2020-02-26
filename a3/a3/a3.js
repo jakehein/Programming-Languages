@@ -73,31 +73,33 @@ var closest = function (ns, n) {
             }
         }
     }
+
 };
 
 var splitList = function (ns) {
 
     if (fp.isNull(ns)) {
-        console.log("list is null");
         return fp.makeList(ns);
     }
     else if (fp.isNull(fp.tl(ns))) {
-        console.log(1);
         return fp.cons(ns, []);
     }
     else if (fp.isGT(fp.hd(ns), fp.hd(fp.tl(ns)))) {
-        console.log("in GT check");
         return fp.cons(fp.cons(fp.hd(ns), []), splitList(fp.tl(ns)));
     }
     else {
-        console.log(2);
          return fp.cons(fp.cons(fp.hd(ns), fp.hd(splitList(fp.tl(ns)))), fp.tl(splitList(fp.tl(ns))));
     }
+
 };
 
 var addDigits = function (n) {
 
-    /* to be completed */
+    if (fp.isLT(n, 10)){
+        return n;
+    } else {
+        return fp.add(fp.rem(n,10), addDigits(fp.div(n, 10)));
+    }
 
 };
 
