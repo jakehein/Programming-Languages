@@ -105,7 +105,11 @@ var addDigits = function (n) {
 
 var persistence = function (n) {
 
-    /* to be completed */
+    if (fp.isLT(n, 10)){
+        return 0;
+    } else {
+        return fp.add(1, persistence(addDigits(n)));
+    }
 
 };
 
