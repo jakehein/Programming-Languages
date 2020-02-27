@@ -14,9 +14,9 @@ if ( ! exports ) {
 
 var removeLast = function (ns) {
 
-    if (fp.isNull(fp.tl(ns)))
+    if (fp.isNull(fp.tl(ns))) {
         return [];
-    else {
+    } else {
         return fp.cons(fp.hd(ns), removeLast(fp.tl(ns)));
     }
 
@@ -24,12 +24,11 @@ var removeLast = function (ns) {
 
 var middle = function (ns) {
 
-    if (fp.isNull(fp.tl(ns)))
+    if (fp.isNull(fp.tl(ns))) {
         return fp.hd(ns);
-    else if (fp.isNull(removeLast(fp.tl(ns)))) {
+    } else if (fp.isNull(removeLast(fp.tl(ns)))) {
         return fp.hd(ns);
-    }
-    else {
+    } else {
         return middle(removeLast(fp.tl(ns)));
     }
 
@@ -37,9 +36,9 @@ var middle = function (ns) {
 
 var closest = function (ns, n) {
 
-    if (fp.isNull(fp.tl(ns)))
+    if (fp.isNull(fp.tl(ns))) {
         return fp.hd(ns);
-    else if (fp.isEq(fp.hd(ns), n)) { // head isEQ n
+    } else if (fp.isEq(fp.hd(ns), n)) {
         return fp.hd(ns);
     }
     else {
@@ -80,14 +79,11 @@ var splitList = function (ns) {
 
     if (fp.isNull(ns)) {
         return fp.makeList(ns);
-    }
-    else if (fp.isNull(fp.tl(ns))) {
+    } else if (fp.isNull(fp.tl(ns))) {
         return fp.cons(ns, []);
-    }
-    else if (fp.isGT(fp.hd(ns), fp.hd(fp.tl(ns)))) {
+    } else if (fp.isGT(fp.hd(ns), fp.hd(fp.tl(ns)))) {
         return fp.cons(fp.cons(fp.hd(ns), []), splitList(fp.tl(ns)));
-    }
-    else {
+    } else {
          return fp.cons(fp.cons(fp.hd(ns), fp.hd(splitList(fp.tl(ns)))), fp.tl(splitList(fp.tl(ns))));
     }
 
