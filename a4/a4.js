@@ -28,24 +28,21 @@ var prune = function (ns) {
 
 var hasMoreEvensHelper = function (ns, a) {
 
-    if () {
-        //empty
+    if (fp.isNull(ns)) { //ns is empty
+        return a;
+    } else if (fp.isList(fp.hd(ns))) { //head of ns is a list (add acc of head to acc of tail)
+        return fp.add(hasMoreEvensHelper(fp.hd(ns), a), hasMoreEvensHelper(fp.tl(ns), a));
+    } else if (fp.isEq(fp.rem(fp.hd(ns), 2), 0)) { //head isn't a list, determine polarity and add to acc
+        return hasMoreEvensHelper(fp.tl(ns), fp.add(a, 1));
+    } else {
+        return hasMoreEvensHelper(fp.tl(ns), fp.add(a, -1));
     }
-    else if () {
-        //head is a list
-    }
-    else if () {
-        // if even
-    }
-    else {
-        // if odd
-    }
-    /* to be completed */
 
 };
 
 var hasMoreEvens = function (ns) {
-    return hasMoreEvensHelper(ns, [0,0]);   /* here you may ONLY modify the "true" constant */
+    return fp.isGT(hasMoreEvensHelper(ns, 0), 0);
+    //return hasMoreEvensHelper(ns, [0,0]);   /* here you may ONLY modify the "true" constant */
 };
 
 var max = function (ns) {
