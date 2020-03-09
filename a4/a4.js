@@ -1,8 +1,8 @@
 /*************************************
    CS 331 - A4
 
-   your name(s): ________________
-                 ________________
+   your name(s): Jacob Hein
+                 Dan Kuphal
 
  *************************************/
 
@@ -13,14 +13,23 @@ if ( ! exports ) {
 
 var prune = function (ns) {
 
-    /* to be completed */
-    
+    if (fp.isNull(ns)) {
+        return ns;
+    } else if (fp.isNull(fp.tl(ns))) {
+        return [];
+    } else if (fp.isList(fp.hd(ns))) {
+        return fp.cons(prune(fp.hd(ns)), prune(fp.tl(ns)));
+    }
+    else { //hd of tl is not a list
+        return fp.cons(fp.hd(ns), prune(fp.tl(ns)));
+    }
+
 };
 
 var hasMoreEvensHelper = function (ns, a) {
 
     /* to be completed */
-    
+
 };
 
 var hasMoreEvens = function (ns) {
@@ -30,7 +39,7 @@ var hasMoreEvens = function (ns) {
 var max = function (ns) {
 
     /* to be completed */
-    
+
 };
 
 var countEvens = function (ns) {
@@ -40,8 +49,8 @@ var countEvens = function (ns) {
 
 var getHeaviest = function (ns) {
 
-    /* to be completed */    
-    
+    /* to be completed */
+
 };
 
 exports.hasMoreEvens = hasMoreEvens;
