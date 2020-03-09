@@ -28,12 +28,24 @@ var prune = function (ns) {
 
 var hasMoreEvensHelper = function (ns, a) {
 
+    if () {
+        //empty
+    }
+    else if () {
+        //head is a list
+    }
+    else if () {
+        // if even
+    }
+    else {
+        // if odd
+    }
     /* to be completed */
 
 };
 
 var hasMoreEvens = function (ns) {
-    return true;   /* here you may ONLY modify the "true" constant */
+    return hasMoreEvensHelper(ns, [0,0]);   /* here you may ONLY modify the "true" constant */
 };
 
 var max = function (ns) {
