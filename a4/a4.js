@@ -19,8 +19,7 @@ var prune = function (ns) {
         return [];
     } else if (fp.isList(fp.hd(ns))) {
         return fp.cons(prune(fp.hd(ns)), prune(fp.tl(ns)));
-    }
-    else { //hd of tl is not a list
+    } else { //hd of tl is not a list
         return fp.cons(fp.hd(ns), prune(fp.tl(ns)));
     }
 
@@ -54,7 +53,8 @@ var max = function (ns) {
 
 var countEvens = function (ns) {
 
-    /* to be completed */
+    //return fp.reduce(fp.add, fp.reduceRight(fp.rem, ns, 2), 0);
+
 };
 
 var getHeaviest = function (ns) {
