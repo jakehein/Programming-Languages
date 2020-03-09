@@ -41,13 +41,14 @@ var hasMoreEvensHelper = function (ns, a) {
 };
 
 var hasMoreEvens = function (ns) {
+
     return fp.isGT(hasMoreEvensHelper(ns, 0), 0);
-    //return hasMoreEvensHelper(ns, [0,0]);   /* here you may ONLY modify the "true" constant */
+
 };
 
 var max = function (ns) {
 
-    /* to be completed */
+    return fp.reduce(fp.max, ns, fp.hd(ns)); //that was easy...
 
 };
 
