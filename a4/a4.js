@@ -19,7 +19,7 @@ var prune = function (ns) {
         return [];
     } else if (fp.isList(fp.hd(ns))) {
         return fp.cons(prune(fp.hd(ns)), prune(fp.tl(ns)));
-    } else { 
+    } else {
         return fp.cons(fp.hd(ns), prune(fp.tl(ns)));
     }
 
@@ -61,10 +61,8 @@ var getHeaviest = function (ns) {
 
     return fp.reduce(function(x,y) {
         if(fp.isNumber(y)){
-            console.log(1);
             return fp.max(y, x);
         } else {
-            console.log(2);
             return fp.max(fp.reduce(fp.add, y, 0), x);
         }
     },  ns, 0);
