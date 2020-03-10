@@ -53,7 +53,7 @@ var max = function (ns) {
 
 var countEvens = function (ns) {
 
-    //return fp.reduce(fp.add, fp.reduceRight(fp.rem, ns, 2), 0);
+    return fp.reduce(function(x,y) {return fp.add(fp.rem(fp.add(1, y),2),x);}, ns, 0);
 
 };
 
