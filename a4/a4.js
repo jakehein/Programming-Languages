@@ -19,7 +19,7 @@ var prune = function (ns) {
         return [];
     } else if (fp.isList(fp.hd(ns))) {
         return fp.cons(prune(fp.hd(ns)), prune(fp.tl(ns)));
-    } else { //hd of tl is not a list
+    } else { 
         return fp.cons(fp.hd(ns), prune(fp.tl(ns)));
     }
 
@@ -27,11 +27,11 @@ var prune = function (ns) {
 
 var hasMoreEvensHelper = function (ns, a) {
 
-    if (fp.isNull(ns)) { //ns is empty
+    if (fp.isNull(ns)) {
         return a;
-    } else if (fp.isList(fp.hd(ns))) { //head of ns is a list (add acc of head to acc of tail)
+    } else if (fp.isList(fp.hd(ns))) {
         return fp.add(hasMoreEvensHelper(fp.hd(ns), a), hasMoreEvensHelper(fp.tl(ns), a));
-    } else if (fp.isEq(fp.rem(fp.hd(ns), 2), 0)) { //head isn't a list, determine polarity and add to acc
+    } else if (fp.isEq(fp.rem(fp.hd(ns), 2), 0)) {
         return hasMoreEvensHelper(fp.tl(ns), fp.add(a, 1));
     } else {
         return hasMoreEvensHelper(fp.tl(ns), fp.add(a, -1));
@@ -47,7 +47,7 @@ var hasMoreEvens = function (ns) {
 
 var max = function (ns) {
 
-    return fp.reduce(fp.max, ns, fp.hd(ns)); //that was easy...
+    return fp.reduce(fp.max, ns, fp.hd(ns));
 
 };
 
@@ -59,7 +59,15 @@ var countEvens = function (ns) {
 
 var getHeaviest = function (ns) {
 
-    /* to be completed */
+    return fp.reduce(function(x,y) {
+        if(fp.isNumber(y)){
+            console.log(1);
+            return fp.max(y, x);
+        } else {
+            console.log(2);
+            return fp.max(fp.reduce(fp.add, y, 0), x);
+        }
+    },  ns, 0);
 
 };
 
