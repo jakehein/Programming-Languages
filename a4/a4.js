@@ -30,7 +30,8 @@ var hasMoreEvensHelper = function (ns, a) {
     if (fp.isNull(ns)) {
         return a;
     } else if (fp.isList(fp.hd(ns))) {
-        return fp.add(hasMoreEvensHelper(fp.hd(ns), a), hasMoreEvensHelper(fp.tl(ns), a));
+        return fp.add(hasMoreEvensHelper(fp.hd(ns), a),
+                      hasMoreEvensHelper(fp.tl(ns), a));
     } else if (fp.isEq(fp.rem(fp.hd(ns), 2), 0)) {
         return hasMoreEvensHelper(fp.tl(ns), fp.add(a, 1));
     } else {
@@ -53,14 +54,17 @@ var max = function (ns) {
 
 var countEvens = function (ns) {
 
-    return fp.reduce(function(x,y) {return fp.add(fp.rem(fp.add(1, y),2),x);}, ns, 0);
+    return fp.reduce(function (x,y)
+        {
+            return fp.add(fp.rem(fp.add(1, y), 2), x);
+        }, ns, 0);
 
 };
 
 var getHeaviest = function (ns) {
 
-    return fp.reduce(function(x,y) {
-        if(fp.isNumber(y)){
+    return fp.reduce(function (x,y) {
+        if (fp.isNumber(y)) {
             return fp.max(y, x);
         } else {
             return fp.max(fp.reduce(fp.add, y, 0), x);
