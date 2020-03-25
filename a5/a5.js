@@ -6,14 +6,35 @@ if ( ! exports ) {
 
 var weightedSum = function (ns,ws) {
 
-    var helper = function (  /* ??? */ ) {
-
-	/* implement this function */
+    var helper = function (  ns, ws, k ) {
+        if (fp.isNull(ns)) {
+            return k(0);
+        } else if (fp.isNull(ws)) {
+            return "Too few weights provided!";
+        } else if (fp.isLT(fp.hd(ws), 0)) {
+            throw new Error("Negative weight detected!");
+        }  else if (fp.isEq(fp.hd(ws), 0)) {
+            return helper(fp.tl(ns), fp.tl(ws), function(x) {
+                return k(x);
+            });
+        } else if (fp.isEq(fp.hd(ns), 1)) {
+            return helper(fp.tl(ns), fp.tl(ws), function(x) {
+                return k(fp.add(x, fp.hd(ws)));
+            });
+        } else if (fp.isEq(fp.hd(ws), 1)) {
+            return helper(fp.tl(ns), fp.tl(ws), function(x) {
+                return k(fp.add(x, fp.hd(ns)));
+            });
+        } else {
+            return helper(fp.tl(ns), fp.tl(ws), function(x) {
+                return k(fp.add(x , fp.mul(fp.hd(ns), fp.hd(ws))));
+            });
+        }
 
     };
     
-    // hint: call the helper function here before returning
-    
+    return helper(ns, ws, function(x) {return x});
+
 };
 
 // a few test cases
