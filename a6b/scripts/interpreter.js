@@ -54,6 +54,25 @@ function applyPrimitive(prim,args) {
     case "length":
     typeCheckPrimitiveOp(prim,args,[E.isString]);
     return E.createNum(E.getStringValue(args[0]).length);
+    case ">":
+    typeCheckPrimitiveOp(prim,[args[0],args[1]],[E.isNum,E.isNum]);
+    if (args[0][1] > args[1][1]) {
+        if (args[2][0] === "Num") {
+            return E.createNum(E.getNumValue(args[2]));
+        } else if (args[2][0] === "String") {
+            return E.createString(E.getStringValue(args[2]));
+        } else {
+            return args[2];
+        }
+    } else {
+        if (args[3][0] === "Num") {
+            return E.createNum(E.getNumValue(args[3]));
+        } else if (args[3][0] === "String") {
+            return E.createString(E.getStringValue(args[3]));
+        } else {
+            return args[3];
+    }
+    }
     }
 }
 function evalExp(exp,envir) {
@@ -92,6 +111,11 @@ function evalExp(exp,envir) {
 			      SLang.absyn.getPrimAppExpArgs(exp)
 			      .map( function(arg) {
                                   return evalExp(arg,envir); } ));
+    } else if (A.isIfExp(exp)) {
+        return applyPrimitive(">",
+                SLang.absyn.getIfExp(exp)
+                .map( function(arg) {
+                        return evalExp(arg,envir); } ));
     } else {
 	throw "Error: Attempting to evaluate an invalid expression";
     }

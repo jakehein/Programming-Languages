@@ -9,21 +9,25 @@ QUOTES            ["]
 
 %%
 
-\s+                                   { /* skip whitespace */ }
-"fn"				      { return 'FN'; }
-"("                   		      { return 'LPAREN'; }
-")"                   		      { return 'RPAREN'; }
-"+"                   		      { return 'PLUS'; }
-"*"                   		      { return 'TIMES'; }
-"add1"                            { return 'ADD1'; }
-"length"                          { return 'LENGTH'; }
-","                   		      { return 'COMMA'; }
-"=>"                   		      { return 'THATRETURNS'; }
-<<EOF>>               		      { return 'EOF'; }
-{QUOTES}({LETTER}|{DIGIT}|_)*{QUOTES} { return 'STRING'; }
-{LETTER}({LETTER}|{DIGIT}|_)*  	      { return 'VAR'; }
-{DIGIT}+                              { return 'INT'; }
-.                     		      { return 'INVALID'; }
+\s+                                      { /* skip whitespace */ }
+"fn"				                     { return 'FN'; }
+"("                   		             { return 'LPAREN'; }
+")"                   		             { return 'RPAREN'; }
+"+"                   		             { return 'PLUS'; }
+"*"                   		             { return 'TIMES'; }
+">"                                      { return 'GREATERTHAN'; }
+"add1"                                   { return 'ADD1'; }
+"length"                                 { return 'LENGTH'; }
+","                   		             { return 'COMMA'; }
+"=>"                   		             { return 'THATRETURNS'; }
+<<EOF>>               		             { return 'EOF'; }
+"if"                                     { return 'IF'; }
+"then"                                   { return 'THEN'; }
+"else"                                   { return 'ELSE'; }
+{QUOTES}({LETTER}|{DIGIT}|_)*{QUOTES}    { return 'STRING'; }
+{LETTER}({LETTER}|{DIGIT}|_)*  	         { return 'VAR'; }
+{DIGIT}+                                 { return 'INT'; }
+.                     		             { return 'INVALID'; }
 
 /lex
 
@@ -43,6 +47,12 @@ exp
     | app_exp       { $$ = $1; }
     | prim_app_exp  { $$ = $1; }
     | string_exp    { $$ = $1; }
+    | if_exp        { $$ = $1; }
+    ;
+
+if_exp
+    : IF exp GREATERTHAN exp THEN exp ELSE exp
+      { $$ = SLang.absyn.createIfExp( $2, $4, $6, $8 ); }
     ;
 
 var_exp

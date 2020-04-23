@@ -8,7 +8,22 @@ var exports = {};
 
 // denoted values in the interpreted language SLang 1
 //  Num, Clo
-
+/*
+function createIf(n) {
+    return ["Num",n];
+}
+function isIf(value) {
+    return value[0] === "IfExp";
+}
+function getIfValue(value) {
+    if (isNum(value)) {
+	return value[1];
+    } else {
+	throw new Error("Interpreter error: "  +
+			"The argument of getNumValue is not a Num value.");
+    }
+}
+*/
 function createNum(n) {
     return ["Num",n];
 }

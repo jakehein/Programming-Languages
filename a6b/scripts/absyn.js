@@ -20,6 +20,22 @@ function getProgramExp(e) {
 			"The argument of getProgramExp is not a program.");
     }
 }
+
+function createIfExp(first, second, then, el) {
+    return ["IfExp", first, second, then, el];
+}
+function isIfExp(e) {
+    return e[0] === "IfExp";
+}
+function getIfExp(e) {
+    if (isIfExp(e)) {
+	return [e[1],e[2],e[3],e[4]];
+    } else {
+	throw new Error("Interpreter error: "  +
+			"The argument of getIfExp is not an IfExp.");
+    }
+}
+
 function createVarExp(v) {
     return ["VarExp", v];
 }
@@ -129,6 +145,9 @@ function getPrimAppExpArgs(e) {
     }
 }
 
+exports.createIfExp = createIfExp;
+exports.isIfExp = isIfExp;
+exports.getIfExp = getIfExp;
 exports.createProgram = createProgram;
 exports.isProgram = isProgram;
 exports.getProgramExp = getProgramExp;
