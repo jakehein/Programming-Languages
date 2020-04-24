@@ -32,13 +32,15 @@ function typeCheckPrimitiveOp(op,args,typeCheckerFunctions) {
 function applyPrimitive(prim,args) {
     switch (prim) {
     case "+":
-    if (args[0][0] === "Num" && args[1][0] === "Num"){
+    if (args.length < 2) {
+        typeCheckPrimitiveOp(prim,args,[E.isNum,E.isNum]);
+    } else if (args[0][0] === "Num" && args[1][0] === "Num"){
         typeCheckPrimitiveOp(prim,args,[E.isNum,E.isNum]);
         return E.createNum( E.getNumValue(args[0]) + E.getNumValue(args[1]));
     } else if (args[0][0] === "Num" && args[1][0] === "String") {
         typeCheckPrimitiveOp(prim,args,[E.isNum,E.isString]);
         return E.createString( E.getNumValue(args[0]) + E.getStringValue(args[1]));
-    } else if (args[0][0] === "String" && args[1][0] === "Num"){
+    } else if (args[0][0] === "String" && args[1][0] === "Num") {
         typeCheckPrimitiveOp(prim,args,[E.isString,E.isNum]);
         return E.createString( E.getStringValue(args[0]) + E.getNumValue(args[1]));
     } else {
