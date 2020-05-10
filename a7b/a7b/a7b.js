@@ -27,7 +27,14 @@ module.exports = { };
     //                              Problem 2
     ///////////////////////////////////////////////////////////////////////////
 
-    var sqrt = function () { return 1; }; // To be modified
+    var sqrt = function (seq, eps) {
+        if (is.hd(is.tl(seq)) - is.hd(seq) < eps) {
+            return is.hd(is.tl(seq));
+        } else {
+            return sqrt(is.tl(seq), eps);
+        }
+    };
+    // To be modified
 
     ///////////////////////////////////////////////////////////////////////////
     //                              Problem 3
