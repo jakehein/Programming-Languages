@@ -19,11 +19,9 @@ module.exports = { };
     ///////////////////////////////////////////////////////////////////////////
     //  x1 = (x0 + S / x0) / 2
     var makeSqrtSeq = function (num, guess) {
-        return function (num, guess) {
-            return ((guess + (num / guess)) / 2);
-        };
-        //return 1;
-    }; // To be modified
+        return is.iterates(function(guess) {return (guess + num / guess) / 2; },
+        guess);
+};
 
     ///////////////////////////////////////////////////////////////////////////
     //                              Problem 2
