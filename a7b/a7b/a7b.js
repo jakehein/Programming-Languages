@@ -28,10 +28,17 @@ module.exports = { };
     ///////////////////////////////////////////////////////////////////////////
 
     var sqrt = function (seq, eps) {
-        if (is.hd(is.tl(seq)) - is.hd(seq) < eps) {
-            return is.hd(is.tl(seq));
+        if ((is.hd(is.tl(seq)) - is.hd(seq)) < 0)
+            if ((is.hd(is.tl(seq)) - is.hd(seq)) * -1 < eps) {
+                return is.hd(is.tl(seq));
+            } else {
+                return sqrt(is.tl(seq), eps);
         } else {
-            return sqrt(is.tl(seq), eps);
+            if ((is.hd(is.tl(seq)) - is.hd(seq)) < eps) {
+                return is.hd(is.tl(seq));
+            } else {
+                return sqrt(is.tl(seq), eps);
+            }
         }
     };
     // To be modified
