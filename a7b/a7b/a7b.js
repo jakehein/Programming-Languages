@@ -17,7 +17,6 @@ module.exports = { };
     ///////////////////////////////////////////////////////////////////////////
     //                              Problem 1
     ///////////////////////////////////////////////////////////////////////////
-    //  x1 = (x0 + S / x0) / 2
     var makeSqrtSeq = function (num, guess) {
         return is.iterates(function(guess) {return (guess + num / guess) / 2; },
         guess);
@@ -41,13 +40,25 @@ module.exports = { };
             }
         }
     };
-    // To be modified
 
     ///////////////////////////////////////////////////////////////////////////
     //                              Problem 3
     ///////////////////////////////////////////////////////////////////////////
 
-    var cumulate = function () { return 1; }; // To be modified
+    var cumulate = function (seq) {
+
+        return is.cons( is.hd(seq), function(){ return is.map(function(sum) {
+            sum = sum + is.hd(seq) + is.hd(is.tl(seq));
+            return sum}, is.drop(seq, 1))});
+        };
+/*
+        return is.iterates(function(){return is.map(function(sum) {
+            sum = sum + is.hd(seq) + is.hd(is.tl(seq));
+            return sum}, seq)}, is.hd(seq));
+        //return is.cons(is.hd(seq), function(){return cumulate(is.cons(is.hd(seq) + is.hd(is.tl(seq)), function() {return is.tl(seq)}))
+        //});
+    };
+*/
 
     // Do NOT modify this file below this point
 
