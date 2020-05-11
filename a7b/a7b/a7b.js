@@ -46,19 +46,11 @@ module.exports = { };
     ///////////////////////////////////////////////////////////////////////////
 
     var cumulate = function (seq) {
-
-        return is.cons( is.hd(seq), function(){ return is.map(function(sum) {
-            sum = sum + is.hd(seq) + is.hd(is.tl(seq));
-            return sum}, is.drop(seq, 1))});
+        return is.cons(is.hd(seq), function() {
+            return cumulate(is.cons(is.hd(seq) + is.hd(is.tl(seq)),
+            function() { return is.tl(is.tl(seq));}));
+        });
         };
-/*
-        return is.iterates(function(){return is.map(function(sum) {
-            sum = sum + is.hd(seq) + is.hd(is.tl(seq));
-            return sum}, seq)}, is.hd(seq));
-        //return is.cons(is.hd(seq), function(){return cumulate(is.cons(is.hd(seq) + is.hd(is.tl(seq)), function() {return is.tl(seq)}))
-        //});
-    };
-*/
 
     // Do NOT modify this file below this point
 
